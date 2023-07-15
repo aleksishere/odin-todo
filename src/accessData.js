@@ -1,6 +1,16 @@
+import { drawList } from "./drawObjects";
+
+function updateIDs(tasksList) {
+    for(let index=0; index < tasksList.length; index++) {
+        tasksList[index]['id'] = index;
+    }
+    drawList(tasksList);
+}
+
 function removeTask(e,tasksList) {
     document.getElementById(e.parentNode.parentNode.parentNode.parentNode.id).remove();
     tasksList.splice(e.parentNode.parentNode.parentNode.parentNode.id,1);
+    updateIDs(tasksList);
 }
 
 function changeTaskStatus(e,tasksList) {
@@ -14,4 +24,15 @@ function changeTaskStatus(e,tasksList) {
     }
 }
 
-export {removeTask, changeTaskStatus};
+function changePriorityStatus(e,tasksList) {
+    let node = e.parentNode.parentNode.parentNode.parentNode;
+    if(tasksList[node.id]['priority'] == 'unchecked') {
+        tasksList[node.id]['priority'] = 'checked'
+        node.getElementsByClassName('importantIcon')[0].setAttribute('src','icons/pin_angle_fill_icon.svg');
+    } else {
+        tasksList[node.id]['priority'] = 'unchecked'
+        node.getElementsByClassName('importantIcon')[0].setAttribute('src','icons/push_pin_bold_icon.svg');
+    }
+}
+
+export {removeTask, changeTaskStatus, changePriorityStatus, updateIDs};

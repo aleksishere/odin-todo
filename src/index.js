@@ -1,4 +1,5 @@
-import { drawList,addClasses,removeClasses } from "./drawObjects";
+import { addClasses,removeClasses } from "./drawObjects";
+import { updateIDs } from "./accessData";
 
 const tasksList = [];
 let counter = 0;
@@ -15,7 +16,7 @@ class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.finished = finished;
-        this.id = counter++;
+        this.id = id;
     }
 
 }
@@ -38,6 +39,6 @@ function verifyData(title,description,dueDate,priority) {
         let task = new Task(title,description,dueDate,priority,"no");
         tasksList.push(task);
         removeClasses();
-        drawList(tasksList);
+        updateIDs(tasksList);
     }
 }

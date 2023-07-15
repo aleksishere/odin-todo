@@ -1,4 +1,4 @@
-import { removeTask,changeTaskStatus } from "./accessData";
+import { removeTask,changeTaskStatus,changePriorityStatus } from "./accessData";
 
 const section = document.getElementById('addPopout');
 const overlay = document.getElementById('overlay');
@@ -16,7 +16,11 @@ function drawList(tasksList) {
         listItem.appendChild(sidebarWrapper);
 
         let checkIcon = document.createElement('img');
-        checkIcon.setAttribute('src','icons/blank_check_circle_icon.svg');
+        if(tasksList[index]['finished'] == 'yes') {
+            checkIcon.setAttribute('src','icons/check_circle_icon.svg');
+        } else {
+            checkIcon.setAttribute('src','icons/blank_check_circle_icon.svg');
+        }
         checkIcon.classList.add('taskIcon');
         sidebarWrapper.appendChild(checkIcon);
 
@@ -39,6 +43,16 @@ function drawList(tasksList) {
         let iconsWrapper = document.createElement('div');
         iconsWrapper.classList.add('iconsWrapper');
         topWrapper.appendChild(iconsWrapper);
+
+        let importantIcon = document.createElement('img');
+        if(tasksList[index]['priority'] == 'checked') {
+            importantIcon.setAttribute('src','icons/pin_angle_fill_icon.svg');
+        } else {
+            importantIcon.setAttribute('src','icons/push_pin_bold_icon.svg');
+        }
+        importantIcon.classList.add('importantIcon');
+        importantIcon.style = 'height: 30px;'
+        iconsWrapper.appendChild(importantIcon);
 
         let trashIcon = document.createElement('img');
         trashIcon.setAttribute('src','icons/trash_sharp_icon.svg')
@@ -64,6 +78,11 @@ function drawList(tasksList) {
         element.addEventListener('click', () => {
             changeTaskStatus(element, tasksList);
         });
+    });
+    Array.from(document.getElementsByClassName('importantIcon')).forEach(element => {
+        element.addEventListener('click', () => {
+            changePriorityStatus(element, tasksList);
+        })
     });
 }
 
