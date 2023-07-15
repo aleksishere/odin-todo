@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="addPopout">
+        <form action="">
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title">
+            <label for="description">Description</label>
+            <input id="description" type="text" name="description">
+            <div>
+                <label for="priority">Important</label>
+                <input id="priority" type="checkbox" name="priority">
+            </div>
+            <label for="dueDate">Date:</label>
+            <input id="dueDate" type="datetime-local" name="dueDate" required>
+            <div>
+                <a id="submit" href="">Submit</a>
+                <a id="closeButton" href="">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <header>
+        <h1 class="no-margin">Todo!</h1>
+        <h3 class="no-margin">Your simple todo app.</h3>
+        <a id="addButton"><img src="icons/add_icon.svg" alt=""></a>
+    </header>
+    <main>
+        <div id="list-items">
+
+        </div>
+    </main>
+    <div id="overlay"></div>
+    <script src="main.js"></script>
+</body>
+</html>
