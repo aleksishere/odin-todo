@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+#addPopout {
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border: 4px solid black;
+}
+
+.list-item {
+    display: flex;
+    gap: 15px;
+    border-bottom: 1px solid rgba(0,0,0, 0.2);
+    padding: 10px 0;
+}
+
+.topWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconsWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-margin {
+    margin: 0;
+}

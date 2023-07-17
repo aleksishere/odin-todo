@@ -1,13 +1,20 @@
-import { addClasses,removeClasses } from "./drawObjects";
 import { updateIDs } from "./accessData";
+import './style.css';
 
 const tasksList = [];
-let counter = 0;
 const addButton = document.getElementById('addButton');
 const closeButton = document.getElementById('closeButton');
 const submitButton = document.getElementById('submit');
-addButton.addEventListener('click', addClasses)
-closeButton.addEventListener('click', removeClasses)
+const section = document.getElementById('addPopout');
+
+addButton.addEventListener('click', () => {
+    section.showModal();
+})
+closeButton.addEventListener('click', () => {
+    section.close();
+})
+
+
 
 class Task {
     constructor(title,description,dueDate,priority,finished,id) {
@@ -38,7 +45,7 @@ function verifyData(title,description,dueDate,priority) {
     } else {
         let task = new Task(title,description,dueDate,priority,"no");
         tasksList.push(task);
-        removeClasses();
+        section.close();
         updateIDs(tasksList);
     }
 }

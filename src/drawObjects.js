@@ -1,7 +1,5 @@
 import { removeTask,changeTaskStatus,changePriorityStatus } from "./accessData";
 
-const section = document.getElementById('addPopout');
-const overlay = document.getElementById('overlay');
 let main = document.getElementById('list-items');
 function drawList(tasksList) {
     main.innerText = '';
@@ -12,20 +10,20 @@ function drawList(tasksList) {
         main.appendChild(listItem);
 
         let sidebarWrapper = document.createElement('div');
-        sidebarWrapper.style = 'margin-top: 8px;'
+        sidebarWrapper.classList.add('mt-4');
         listItem.appendChild(sidebarWrapper);
 
         let checkIcon = document.createElement('img');
+        checkIcon.classList.add('w-8','taskIcon');
         if(tasksList[index]['finished'] == 'yes') {
             checkIcon.setAttribute('src','icons/check_circle_icon.svg');
         } else {
             checkIcon.setAttribute('src','icons/blank_check_circle_icon.svg');
         }
-        checkIcon.classList.add('taskIcon');
         sidebarWrapper.appendChild(checkIcon);
 
         let textWrapper = document.createElement('div');
-        textWrapper.style = 'display: flex; flex-direction: column; flex: 1;'
+        textWrapper.classList.add('flex','flex-col','flex-1');
         listItem.appendChild(textWrapper);
 
         let topWrapper = document.createElement('div');
@@ -37,7 +35,7 @@ function drawList(tasksList) {
 
         let titleParagraph = document.createElement('p');
         titleParagraph.innerText = tasksList[index]['title'];
-        titleParagraph.style = 'font-weight: 700; font-size: 45px;'
+        titleParagraph.classList.add('font-bold','text-5xl');
         titleWrapper.appendChild(titleParagraph);
 
         let iconsWrapper = document.createElement('div');
@@ -50,14 +48,12 @@ function drawList(tasksList) {
         } else {
             importantIcon.setAttribute('src','icons/push_pin_bold_icon.svg');
         }
-        importantIcon.classList.add('importantIcon');
-        importantIcon.style = 'height: 30px;'
+        importantIcon.classList.add('importantIcon','h-8');
         iconsWrapper.appendChild(importantIcon);
 
         let trashIcon = document.createElement('img');
         trashIcon.setAttribute('src','icons/trash_sharp_icon.svg')
-        trashIcon.classList.add('trash');
-        trashIcon.style = 'height: 30px;'
+        trashIcon.classList.add('trash','h-8');
         iconsWrapper.appendChild(trashIcon);
 
         let descriptionParagraph = document.createElement('p');
@@ -66,7 +62,7 @@ function drawList(tasksList) {
 
         let dueDateParagraph = document.createElement('p');
         dueDateParagraph.innerText = tasksList[index]['dueDate'];
-        dueDateParagraph.style = 'font-size: 13px; padding-top: 3px;'
+        dueDateParagraph.classList.add('text-xl','pt-1');
         textWrapper.appendChild(dueDateParagraph);
     }
     Array.from(document.getElementsByClassName('trash')).forEach(element => {
@@ -86,15 +82,4 @@ function drawList(tasksList) {
     });
 }
 
-function addClasses() {
-    section.classList.add('active');
-    overlay.classList.add('active');
-}
-
-function removeClasses() {
-    event.preventDefault();
-    section.classList.remove('active');
-    overlay.classList.remove('active');
-}
-
-export {drawList,addClasses,removeClasses};
+export {drawList};
