@@ -9,40 +9,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo!</title>
-    <link rel="stylesheet" href="style.css">
+    
 </head>
-<body>
-
-    <div id="addPopout">
-        <form action="">
-            <label for="title">Title</label>
-            <input id="title" type="text" name="title">
-            <label for="description">Description</label>
-            <input id="description" type="text" name="description">
-            <div>
+<body class="bg-slate-100">
+    <header class="text-center text-lg mt-5">
+        <h1 class="text-7xl">Todo!</h1>
+        <h3 class="text-3xl">Your simple todo app.</h3>
+        <button id="addButton"><img class="w-6" src="icons/add_icon.svg" alt=""></button>
+    </header>
+    <main class="w-7/12 ml-auto mr-auto">
+        <div id="list-items" class="grid text-3xl"></div>
+    </main>
+    <dialog id="addPopout" class="p-7 rounded-lg z-10">
+        <form class="flex flex-col text-2xl gap-2">
+            <div class="flex flex-col items-center">
+                <label for="title">Title</label>
+                <input class="outline outline-offset-2 outline-2" id="title" type="text" name="title">
+            </div>
+            <div class="flex flex-col items-center">
+                <label for="description">Description</label>
+                <input class="outline outline-offset-2 outline-2" id="description" type="text" name="description">
+            </div>
+            <div class="flex flex-row justify-center gap-2">
                 <label for="priority">Important</label>
                 <input id="priority" type="checkbox" name="priority">
             </div>
-            <label for="dueDate">Date:</label>
-            <input id="dueDate" type="datetime-local" name="dueDate" required>
-            <div>
-                <a id="submit" href="">Submit</a>
-                <a id="closeButton" href="">Cancel</a>
+            <div class="flex flex-col items-center">
+                <label for="dueDate">Date:</label>
+                <input class="outline outline-offset-2 outline-2" id="dueDate" type="datetime-local" name="dueDate">
+            </div>
+            <div class="flex justify-center gap-3 mt-4">
+                <button type="button" id="submit" href="">Submit</button>
+                <button type="button" id="closeButton" href="">Cancel</button>
             </div>
         </form>
-    </div>
-
-    <header>
-        <h1 class="no-margin">Todo!</h1>
-        <h3 class="no-margin">Your simple todo app.</h3>
-        <a id="addButton"><img src="icons/add_icon.svg" alt=""></a>
-    </header>
-    <main>
-        <div id="list-items">
-
-        </div>
-    </main>
-    <div id="overlay"></div>
+    </dialog>
     <script src="main.js"></script>
 </body>
 </html>
