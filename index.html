@@ -5,7 +5,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
-
+    <link rel="shortcut icon" href="./icons/pin_angle_fill_icon.svg" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo!</title>
@@ -17,7 +17,7 @@
         <h3 class="text-3xl">Your simple todo app.</h3>
         <button id="addButton"><img class="w-6" src="icons/add_icon.svg" alt=""></button>
     </header>
-    <main class="w-7/12 ml-auto mr-auto">
+    <main class="w-8/12 ml-auto mr-auto">
         <div id="list-items" class="grid text-3xl"></div>
     </main>
     <dialog id="addPopout" class="p-7 rounded-lg z-10">
@@ -44,6 +44,27 @@
             </div>
         </form>
     </dialog>
+    <dialog id="editPopout" class="p-7 rounded-lg z-10">
+        <form class="flex flex-col text-2xl gap-2">
+            <div class="flex flex-col items-center">
+                <label for="title">Title</label>
+                <input class="outline outline-offset-2 outline-2" id="titleEdit" type="text" name="title">
+            </div>
+            <div class="flex flex-col items-center">
+                <label for="description">Description</label>
+                <input class="outline outline-offset-2 outline-2" id="descriptionEdit" type="text" name="description">
+            </div>
+            <div class="flex flex-col items-center">
+                <label for="dueDate">Date:</label>
+                <input class="outline outline-offset-2 outline-2" id="dueDateEdit" type="datetime-local" name="dueDate">
+            </div>
+            <div class="flex justify-center gap-3 mt-4">
+                <button type="button" id="saveButtonEdit">Save</button>
+                <button type="button" id="closeButtonEdit">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    
     <script src="main.js"></script>
 </body>
 </html>
