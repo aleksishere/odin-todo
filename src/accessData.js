@@ -1,10 +1,14 @@
 import { drawList } from "./drawObjects";
 
 function updateIDs(tasksList) {
+    let dates = []
+    let sortedAsc = tasksList.sort(
+        (objA, objB) => Number(objA.dueDate) - Number(objB.dueDate),
+    );
     for(let index=0; index < tasksList.length; index++) {
         tasksList[index]['id'] = index;
     }
-    drawList(tasksList);
+    drawList(tasksList,dates);
 }
 
 function removeTask(e,tasksList) {

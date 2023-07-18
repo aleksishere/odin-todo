@@ -1,4 +1,6 @@
 import { removeTask,changeTaskStatus,changePriorityStatus } from "./accessData";
+import drawEditModal from "./drawEditModal";
+import formatISO9075 from "date-fns/formatISO9075";
 
 let main = document.getElementById('list-items');
 function drawList(tasksList) {
@@ -10,7 +12,7 @@ function drawList(tasksList) {
         main.appendChild(listItem);
 
         let sidebarWrapper = document.createElement('div');
-        sidebarWrapper.classList.add('mt-4');
+        sidebarWrapper.classList.add('mt-4','shrink-0');
         listItem.appendChild(sidebarWrapper);
 
         let checkIcon = document.createElement('img');
@@ -33,14 +35,19 @@ function drawList(tasksList) {
         let titleWrapper = document.createElement('div');
         topWrapper.appendChild(titleWrapper);
 
-        let titleParagraph = document.createElement('p');
+        let titleParagraph = document.createElement('div');
         titleParagraph.innerText = tasksList[index]['title'];
         titleParagraph.classList.add('font-bold','text-5xl');
         titleWrapper.appendChild(titleParagraph);
 
         let iconsWrapper = document.createElement('div');
-        iconsWrapper.classList.add('iconsWrapper');
+        iconsWrapper.classList.add('iconsWrapper','shrink-0');
         topWrapper.appendChild(iconsWrapper);
+
+        let editIcon = document.createElement('img');
+        editIcon.setAttribute('src', 'icons/pen-to-square-regular.svg')
+        editIcon.classList.add('editIcon','h-8');
+        iconsWrapper.appendChild(editIcon);
 
         let importantIcon = document.createElement('img');
         if(tasksList[index]['priority'] == 'checked') {
@@ -61,7 +68,7 @@ function drawList(tasksList) {
         textWrapper.appendChild(descriptionParagraph);
 
         let dueDateParagraph = document.createElement('p');
-        dueDateParagraph.innerText = tasksList[index]['dueDate'];
+        dueDateParagraph.innerText = formatISO9075(tasksList[index]['dueDate']);
         dueDateParagraph.classList.add('text-xl','pt-1');
         textWrapper.appendChild(dueDateParagraph);
     }
@@ -80,6 +87,11 @@ function drawList(tasksList) {
             changePriorityStatus(element, tasksList);
         })
     });
+    Array.from(document.getElementsByClassName('editIcon')).forEach(element => {
+        element.addEventListener('click', () => {
+            drawEditModal(element, tasksList);
+        });
+    })
 }
 
 export {drawList};
