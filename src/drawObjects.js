@@ -1,6 +1,7 @@
 import { removeTask,changeTaskStatus,changePriorityStatus } from "./accessData";
 import drawEditModal from "./drawEditModal";
-import formatISO9075 from "date-fns/formatISO9075";
+import parseISO from "date-fns/parseISO";
+import format from "date-fns/format";
 
 let main = document.getElementById('list-items');
 function drawList(tasksList) {
@@ -46,7 +47,7 @@ function drawList(tasksList) {
 
         let editIcon = document.createElement('img');
         editIcon.setAttribute('src', 'icons/pen-to-square-regular.svg')
-        editIcon.classList.add('editIcon','h-8');
+        editIcon.classList.add('editIcon','h-7','hover:h-8','ease-in','duration-200');
         iconsWrapper.appendChild(editIcon);
 
         let importantIcon = document.createElement('img');
@@ -55,20 +56,20 @@ function drawList(tasksList) {
         } else {
             importantIcon.setAttribute('src','icons/push_pin_bold_icon.svg');
         }
-        importantIcon.classList.add('importantIcon','h-8');
+        importantIcon.classList.add('importantIcon','h-8','hover:h-9','ease-in','duration-200');
         iconsWrapper.appendChild(importantIcon);
 
         let trashIcon = document.createElement('img');
         trashIcon.setAttribute('src','icons/trash_sharp_icon.svg')
-        trashIcon.classList.add('trash','h-8');
+        trashIcon.classList.add('trash','h-8','hover:h-9','ease-in','duration-200');
         iconsWrapper.appendChild(trashIcon);
 
-        let descriptionParagraph = document.createElement('p');
+        let descriptionParagraph = document.createElement('div');
         descriptionParagraph.innerText = tasksList[index]['description'];
         textWrapper.appendChild(descriptionParagraph);
 
         let dueDateParagraph = document.createElement('p');
-        dueDateParagraph.innerText = formatISO9075(tasksList[index]['dueDate']);
+        dueDateParagraph.innerText = format((parseISO(tasksList[index]['dueDate'])), 'p PPPP');
         dueDateParagraph.classList.add('text-xl','pt-1');
         textWrapper.appendChild(dueDateParagraph);
     }

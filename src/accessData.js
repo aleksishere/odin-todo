@@ -1,14 +1,15 @@
 import { drawList } from "./drawObjects";
+import parseISO from "date-fns/parseISO";
 
 function updateIDs(tasksList) {
-    let dates = []
+    localStorage.setItem('tasks',JSON.stringify(tasksList));
     let sortedAsc = tasksList.sort(
-        (objA, objB) => Number(objA.dueDate) - Number(objB.dueDate),
+        (objA, objB) => parseISO(objA.dueDate) - parseISO(objB.dueDate),
     );
     for(let index=0; index < tasksList.length; index++) {
         tasksList[index]['id'] = index;
     }
-    drawList(tasksList,dates);
+    drawList(tasksList);;
 }
 
 function removeTask(e,tasksList) {
@@ -26,6 +27,7 @@ function changeTaskStatus(e,tasksList) {
         tasksList[node.id]['finished'] = 'no'
         node.getElementsByClassName('taskIcon')[0].setAttribute('src','icons/blank_check_circle_icon.svg');
     }
+    updateIDs(tasksList);
 }
 
 function changePriorityStatus(e,tasksList) {
@@ -37,6 +39,7 @@ function changePriorityStatus(e,tasksList) {
         tasksList[node.id]['priority'] = 'unchecked'
         node.getElementsByClassName('importantIcon')[0].setAttribute('src','icons/push_pin_bold_icon.svg');
     }
+    updateIDs(tasksList);
 }
 
 export {removeTask, changeTaskStatus, changePriorityStatus, updateIDs};

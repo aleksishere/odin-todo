@@ -10,10 +10,9 @@ function drawEditModal(element, tasksList) {
     let editPopout = document.getElementById('editPopout');
     let saveButton = document.getElementById('saveButtonEdit');
     let closeButton = document.getElementById('closeButtonEdit');
-
     titleValue.value = tasksList[id]['title'];
     descriptionValue.value = tasksList[id]['description'];
-    dueDateValue.value = parseISO(tasksList[id]['dueDate']);
+    dueDateValue.value = tasksList[id]['dueDate'];
     editPopout.showModal();
 
     closeButton.addEventListener('click', () => {
@@ -23,7 +22,7 @@ function drawEditModal(element, tasksList) {
         if(titleValue.value != '' && descriptionValue.value != '' && isValid(parseISO(dueDateValue.value)) == true) {
             tasksList[id]['title'] = titleValue.value;
             tasksList[id]['description'] = descriptionValue.value;
-            tasksList[id]['dueDate'] = parseISO(dueDateValue.value);
+            tasksList[id]['dueDate'] = dueDateValue.value;
             updateIDs(tasksList);
             editPopout.close();
         } else {

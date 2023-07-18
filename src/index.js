@@ -1,8 +1,14 @@
 import { updateIDs } from "./accessData";
 import './style.css';
-import parseISO from "date-fns/parseISO";
 
-const tasksList = [];
+let tasksList = [];
+
+if(localStorage.getItem('tasks') === null) {
+    tasksList = [];
+} else {
+    tasksList = JSON.parse(localStorage.getItem('tasks'));
+    updateIDs(tasksList);
+}
 const addButton = document.getElementById('addButton');
 const closeButton = document.getElementById('closeButton');
 const submitButton = document.getElementById('submit');
@@ -33,7 +39,7 @@ submitButton.addEventListener('click', () => {
     event.preventDefault();
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
-    let dueDate = parseISO(document.getElementById('dueDate').value);
+    let dueDate = document.getElementById('dueDate').value;
     let priority = document.getElementById('priority');
     if(priority.checked) { priority = 'checked'; } else { priority = 'unchecked';}
     verifyData(title,description,dueDate,priority);
