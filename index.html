@@ -11,16 +11,26 @@
     <title>Todo!</title>
     
 </head>
-<body class="bg-slate-100">
-    <header class="text-center text-lg mt-5">
+<body class="bg-slate-100 dark:text-white dark:bg-zinc-900">
+    <header class="text-center text-lg mt-5 ">
         <h1 class="text-8xl">Todo!</h1>
         <h3 class="text-4xl">Your simple todo app.</h3>
-        <button id="addButton"><img class="w-8 hover:w-9 ease-in duration-300" src="icons/add_icon.svg" alt=""></button>
+        <div class="flex justify-center gap-4">
+            <button id="taskAdd" class="text-2xl hover:text-3xl ease-in duration-300">New Task</button>
+            <button id="addProject" class="text-2xl hover:text-3xl ease-in duration-300">New Project</button>
+            <button id="darkmode"><img class="w-6 dark:invert" src="./icons/lightbulb-solid.svg" alt=""></button>
+        </div>
     </header>
-    <main class="w-2/3 ml-auto mr-auto">
-        <div id="list-items" class="flex flex-col break-all text-3xl"></div>
-    </main>
-    <dialog id="addPopout" class="p-7 rounded-lg z-10">
+    <div class="flex">
+        <aside class="basis-1/5 ml-8">
+            <h3 class="text-5xl pb-4 border-b-2 border-black/20 dark:border-white/80">Projects</h3>
+            <div id="taskProjects"></div>
+        </aside>
+        <main class="w-2/3 ml-auto mr-auto">
+            <div id="list-items" class="flex flex-col break-all text-3xl"></div>
+        </main>
+    </div>
+    <dialog id="addPopout" class="p-7 rounded-lg z-10 dark:bg-neutral-700">
         <form class="flex flex-col text-2xl gap-2">
             <div class="flex flex-col items-center">
                 <label for="title">Title</label>
@@ -38,9 +48,15 @@
                 <label for="dueDate">Date:</label>
                 <input class="outline outline-offset-2 outline-2" id="dueDate" type="datetime-local" name="dueDate">
             </div>
+            <div class="flex flex-row justify-center gap-2">
+                <label for="projectSelect">Select Project</label>
+                <select name="projectSelect" id="projectSelect">
+
+                </select>
+            </div>
             <div class="flex justify-center gap-3 mt-4">
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="submit" href="">Submit</button>
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="closeButton" href="">Cancel</button>
+                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="submitTask" href="">Submit</button>
+                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="taskClose" href="">Cancel</button>
             </div>
         </form>
     </dialog>
@@ -61,6 +77,18 @@
             <div class="flex justify-center gap-3 mt-4">
                 <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="saveButtonEdit">Save</button>
                 <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="closeButtonEdit">Cancel</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="addProjectModal" class="p-7 rounded-lg z-10">
+        <form class="flex flex-col text-2xl gap-2">
+            <div class="flex flex-col items-center">
+                <label for="projectName">Project Name</label>
+                <input class="outline outline-offset-2 outline-2" id="projectName" type="text" name="projectName">
+            </div>
+            <div class="flex justify-center gap-3 mt-4">
+                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="saveButtonProject">Save</button>
+                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="closeButtonProject">Cancel</button>
             </div>
         </form>
     </dialog>
