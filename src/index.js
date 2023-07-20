@@ -1,8 +1,8 @@
 import { updateIDs } from "./accessData";
 import './style.css';
-import { drawProjects, Project,getProjectNames} from "./drawProjects";
+import { drawProjects,getProjectNames} from "./drawProjects";
 
-let projects = [{"name": "All Tasks", "color": "#000"}];
+let projects = ['All Tasks'];
 let tasksList = [];
 if(localStorage.getItem('tasks') === null) {
     tasksList = [];
@@ -11,7 +11,7 @@ if(localStorage.getItem('tasks') === null) {
     updateIDs(tasksList);
 }
 if(localStorage.getItem('projects') === null) {
-    projects = [{"name": "All Tasks", "color": "#000"}];
+    projects = ['All Tasks'];
 } else {
     projects = JSON.parse(localStorage.getItem('projects'));
     updateIDs(tasksList,projects);
@@ -25,10 +25,8 @@ if(localStorage.theme == 'dark') {
 
 drawProjects(tasksList);
 
-const submitTask = document.getElementById('submitTask');
-const section = document.getElementById('addPopout');
-const projectModal = document.getElementById('addProjectModal');
-const projectSave = document.getElementById('saveButtonProject');
+const taskModal = document.getElementById('taskModal');
+const projectModal = document.getElementById('projectModal');
 
 //MANUAL THEME SETTINGS
 document.getElementById('darkmode').addEventListener('click', () => {
@@ -42,59 +40,114 @@ document.getElementById('darkmode').addEventListener('click', () => {
 })
 
 document.getElementById('addProject').addEventListener('click', () => {
+    let projectButtons = document.getElementById('projectButtons');
+    projectButtons.innerText = ''
+
+    let addButton = document.createElement('button');
+    addButton.id = 'saveButtonProject';
+    addButton.innerText = 'Save';
+    addButton.setAttribute('type','button');
+    addButton.classList.add('text-2xl','hover:text-3xl','ease-in','duration-300','dark:text-white');
+    projectButtons.appendChild(addButton);
+
+    let deleteButton = document.createElement('button');
+    deleteButton.id = 'closeButtonProject';
+    deleteButton.innerText = 'Close';
+    deleteButton.setAttribute('type','button');
+    deleteButton.classList.add('text-2xl','hover:text-3xl','ease-in','duration-300','dark:text-white');
+    projectButtons.appendChild(deleteButton);
+
+    buttonsclick("addProject");
     projectModal.showModal();
 })
-document.getElementById('closeButtonProject').addEventListener('click', () => {
-    projectModal.close();
-})
+
 document.getElementById('taskAdd').addEventListener('click', () => {
+    let taskButtons = document.getElementById('taskButtons');
+    taskButtons.innerText = '';
+
+    let addButton = document.createElement('button');
+    addButton.id = 'submitTask';
+    addButton.innerText = 'Save';
+    addButton.setAttribute('type','button');
+    addButton.classList.add('text-2xl','hover:text-3xl','ease-in','duration-300','dark:text-white');
+    taskButtons.appendChild(addButton);
+
+    let deleteButton = document.createElement('button');
+    deleteButton.id = 'taskClose';
+    deleteButton.innerText = 'Close';
+    deleteButton.setAttribute('type','button');
+    deleteButton.classList.add('text-2xl','hover:text-3xl','ease-in','duration-300','dark:text-white');
+    taskButtons.appendChild(deleteButton);
+
+    buttonsclick('addTask');
     getProjectNames();
-    section.showModal();
-})
-document.getElementById('taskClose').addEventListener('click', () => {
-    section.close();
+    taskModal.showModal();
 })
 
 class Task {
-    constructor(title,description,dueDate,priority,finished,project,id) {
+    constructor(title,description,dueDate,finished,project,id) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.priority = priority;
+        this.priority = 'unchecked';
         this.finished = finished;
         this.project = project;
         this.id = id;
     }
-
 }
 
-submitTask.addEventListener('click', () => {
-    let title = document.getElementById('title').value;
-    let description = document.getElementById('description').value;
-    let dueDate = document.getElementById('dueDate').value;
-    let priority = document.getElementById('priority');
-    let option = document.getElementById('projectSelect').value;
-    if(priority.checked) { priority = 'checked'; } else { priority = 'unchecked';}
-    if(title == '' || description == '' || dueDate == '') {
-        return false;
-    } else {
-        let task = new Task(title,description,dueDate,priority,"no",option);
-        tasksList.push(task);
-        section.close();
-        updateIDs(tasksList);
-        console.log(task);
+function buttonsclick(action,id) {
+    if(action == 'addProject') {
+        document.getElementById('saveButtonProject').addEventListener('click', () => {
+            let title = document.getElementById('projectName').value;
+            if(title != '' && projects.includes(title) == false) {
+                projects.push(title);
+                updateIDs(tasksList);
+                projectModal.close();
+            } else {
+                alert("Project already exists!");
+            }
+            localStorage.setItem('projects', JSON.stringify(projects));
+        })
+        document.getElementById('closeButtonProject').addEventListener('click', () => {
+            projectModal.close();
+        })
+    } 
+    if(action == 'editProject') {
+        document.getElementById('editButtonProject').addEventListener('click', (el) => {
+            let title = document.getElementById('projectName').value;
+            if(title != '' && projects.includes(title) == false) {
+                projects[projects.indexOf(id)] = title;
+                updateIDs(tasksList);
+                projectModal.close();
+            } else {
+                alert("Project already exists!");
+            }
+            localStorage.setItem('projects', JSON.stringify(projects));
+        })
+        document.getElementById('closeButtonProject').addEventListener('click', () => {
+            projectModal.close();
+        })
     }
-})
-
-projectSave.addEventListener('click', () => {
-    let title = document.getElementById('projectName').value;
-    if(title != '') {
-        let project = new Project(title);
-        projects.push(project);
-        updateIDs(tasksList);
-        projectModal.close();
+    if(action == 'addTask') {
+        document.getElementById('submitTask').addEventListener('click', () => {
+            let title = document.getElementById('title').value;
+            let description = document.getElementById('description').value;
+            let dueDate = document.getElementById('dueDate').value;
+            let option = document.getElementById('projectSelect').value;
+            if(title == '' || description == '' || dueDate == '') {
+                return false;
+            } else {
+                let task = new Task(title,description,dueDate,"no",option);
+                tasksList.push(task);
+                taskModal.close();
+                updateIDs(tasksList);
+            }
+        })
+        document.getElementById('taskClose').addEventListener('click', () => {
+            taskModal.close();
+        })
     }
-    localStorage.setItem('projects', JSON.stringify(projects));
-})
+}
 
-export {projects};
+export {projects,buttonsclick};

@@ -15,7 +15,7 @@
     <header class="text-center text-lg mt-5 ">
         <h1 class="text-8xl">Todo!</h1>
         <h3 class="text-4xl">Your simple todo app.</h3>
-        <div class="flex justify-center gap-4">
+        <div class="flex justify-center gap-4 pt-2">
             <button id="taskAdd" class="text-2xl hover:text-3xl ease-in duration-300">New Task</button>
             <button id="addProject" class="text-2xl hover:text-3xl ease-in duration-300">New Project</button>
             <button id="darkmode"><img class="w-6 dark:invert" src="./icons/lightbulb-solid.svg" alt=""></button>
@@ -30,66 +30,37 @@
             <div id="list-items" class="flex flex-col break-all text-3xl"></div>
         </main>
     </div>
-    <dialog id="addPopout" class="p-7 rounded-lg z-10 dark:bg-neutral-700">
+    <dialog id="taskModal" class="p-7 rounded-lg z-10 dark:bg-zinc-800">
         <form class="flex flex-col text-2xl gap-2">
             <div class="flex flex-col items-center">
-                <label for="title">Title</label>
-                <input class="outline outline-offset-2 outline-2" id="title" type="text" name="title">
+                <label class="dark:text-white" for="title">Title</label>
+                <input class="outline outline-offset-2 outline-2 dark:text-black" id="title" type="text" name="title">
             </div>
             <div class="flex flex-col items-center">
-                <label for="description">Description</label>
+                <label class="dark:text-white" for="description">Description</label>
                 <input class="outline outline-offset-2 outline-2" id="description" type="text" name="description">
             </div>
-            <div class="flex flex-row justify-center gap-2">
-                <label for="priority">Important</label>
-                <input id="priority" type="checkbox" name="priority">
-            </div>
             <div class="flex flex-col items-center">
-                <label for="dueDate">Date:</label>
+                <label class="dark:text-white" for="dueDate">Date:</label>
                 <input class="outline outline-offset-2 outline-2" id="dueDate" type="datetime-local" name="dueDate">
             </div>
             <div class="flex flex-row justify-center gap-2">
-                <label for="projectSelect">Select Project</label>
-                <select name="projectSelect" id="projectSelect">
-
-                </select>
+                <label class="dark:text-white" for="projectSelect">Select Project</label>
+                <select name="projectSelect" id="projectSelect"></select>
             </div>
-            <div class="flex justify-center gap-3 mt-4">
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="submitTask" href="">Submit</button>
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="taskClose" href="">Cancel</button>
+            <div id="taskButtons" class="flex justify-center gap-3 mt-4">
+                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300 dark:text-white" id="submitTask" href="">Submit</button>
+                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300 dark:text-white" id="taskClose" href="">Cancel</button>
             </div>
         </form>
     </dialog>
-    <dialog id="editPopout" class="p-7 rounded-lg z-10">
+    <dialog id="projectModal" class="p-7 rounded-lg z-10 dark:bg-zinc-800">
         <form class="flex flex-col text-2xl gap-2">
             <div class="flex flex-col items-center">
-                <label for="title">Title</label>
-                <input class="outline outline-offset-2 outline-2" id="titleEdit" type="text" name="title">
-            </div>
-            <div class="flex flex-col items-center">
-                <label for="description">Description</label>
-                <input class="outline outline-offset-2 outline-2" id="descriptionEdit" type="text" name="description">
-            </div>
-            <div class="flex flex-col items-center">
-                <label for="dueDate">Date:</label>
-                <input class="outline outline-offset-2 outline-2" id="dueDateEdit" type="datetime-local" name="dueDate">
-            </div>
-            <div class="flex justify-center gap-3 mt-4">
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="saveButtonEdit">Save</button>
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="closeButtonEdit">Cancel</button>
-            </div>
-        </form>
-    </dialog>
-    <dialog id="addProjectModal" class="p-7 rounded-lg z-10">
-        <form class="flex flex-col text-2xl gap-2">
-            <div class="flex flex-col items-center">
-                <label for="projectName">Project Name</label>
+                <label class="dark:text-white" for="projectName">Project Name</label>
                 <input class="outline outline-offset-2 outline-2" id="projectName" type="text" name="projectName">
             </div>
-            <div class="flex justify-center gap-3 mt-4">
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="saveButtonProject">Save</button>
-                <button type="button" class="text-2xl hover:text-3xl ease-in duration-300" id="closeButtonProject">Cancel</button>
-            </div>
+            <div id="projectButtons" class="flex justify-center gap-3 mt-4"></div>
         </form>
     </dialog>
     

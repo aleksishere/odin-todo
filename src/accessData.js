@@ -1,7 +1,6 @@
 import { drawList } from "./drawObjects";
 import { drawProjects} from "./drawProjects";
 import parseISO from "date-fns/parseISO";
-import { projects } from ".";
 
 function updateIDs(tasksList) {
     localStorage.setItem('tasks',JSON.stringify(tasksList));

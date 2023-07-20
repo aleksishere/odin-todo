@@ -2,7 +2,7 @@ import { removeTask,changeTaskStatus,changePriorityStatus } from "./accessData";
 import drawEditModal from "./drawEditModal";
 import parseISO from "date-fns/parseISO";
 import format from "date-fns/format";
-import { currentProject } from "./drawProjects";
+import { currentProject} from "./drawProjects";
 
 let main = document.getElementById('list-items');
 function drawList(tasksList) {
@@ -19,7 +19,7 @@ function drawList(tasksList) {
             listItem.appendChild(sidebarWrapper);
     
             let checkIcon = document.createElement('img');
-            checkIcon.classList.add('w-8','taskIcon','dark:invert');
+            checkIcon.classList.add('w-8','taskIcon','dark:invert','hover:cursor-pointer');
             if(tasksList[index]['finished'] == 'yes') {
                 checkIcon.setAttribute('src','icons/check_circle_icon.svg');
             } else {
@@ -49,7 +49,7 @@ function drawList(tasksList) {
     
             let editIcon = document.createElement('img');
             editIcon.setAttribute('src', 'icons/pen-to-square-regular.svg')
-            editIcon.classList.add('editIcon','h-7','hover:h-8','ease-in','duration-200','dark:invert');
+            editIcon.classList.add('editIcon','h-7','hover:h-8','ease-in','duration-200','dark:invert','hover:cursor-pointer');
             iconsWrapper.appendChild(editIcon);
     
             let importantIcon = document.createElement('img');
@@ -58,12 +58,12 @@ function drawList(tasksList) {
             } else {
                 importantIcon.setAttribute('src','icons/push_pin_bold_icon.svg');
             }
-            importantIcon.classList.add('importantIcon','h-8','hover:h-9','ease-in','duration-200','dark:invert');
+            importantIcon.classList.add('importantIcon','h-8','hover:h-9','ease-in','duration-200','dark:invert','hover:cursor-pointer');
             iconsWrapper.appendChild(importantIcon);
     
             let trashIcon = document.createElement('img');
             trashIcon.setAttribute('src','icons/trash_sharp_icon.svg')
-            trashIcon.classList.add('trash','h-8','hover:h-9','ease-in','duration-200','dark:invert');
+            trashIcon.classList.add('trash','h-8','hover:h-9','ease-in','duration-200','dark:invert','hover:cursor-pointer');
             iconsWrapper.appendChild(trashIcon);
     
             let descriptionParagraph = document.createElement('div');
